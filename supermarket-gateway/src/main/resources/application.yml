@@ -1,0 +1,31 @@
+server:
+  port: 10010
+spring:
+  application:
+    name: supermarket-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+    registry-fetch-interval-seconds: 5
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 12000
+ribbon:
+  ReadTimeout: 12000
+  ConnectTimeout: 12000
+  eureka:
+    enabled: true
+
+zuul:
+  host:
+    socket-timeout-millis: 12000
+    connect-timeout-millis: 12000
+  prefix: /api
+  routes:
+    item-service: /item/**    #路由到商品的微服务
